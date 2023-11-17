@@ -25,10 +25,8 @@ public class TransactionsMenu {
     }
 
     private void Transactions(int id) {
-        JFrame f = new JFrame("Transactions");
+        JFrame formTransactions = new JFrame("Transactions");
         Controller con = new Controller();
-
-        ArrayList<Transactions> listTransactions = con.getTransactions(id);
 
         DefaultTableModel tableModel = new DefaultTableModel();
 
@@ -40,25 +38,11 @@ public class TransactionsMenu {
         tableModel.addColumn("Game Name");
         tableModel.addColumn("Price");
 
-        for (int i = 0; i < listTransactions.size(); i++) {
-            int idTr = listTransactions.get(i).getId();
-            int userID = listTransactions.get(i).getUser_id();
-            String name = listTransactions.get(i).getUsername();
-            int gameID = listTransactions.get(i).getGame_id();
-            String gameName = listTransactions.get(i).getGameName();
-            String price = listTransactions.get(i).getPrice();
-
-            Object[] data = {idTr, userID, name, gameID, gameName, price};
-
-            tableModel.insertRow(i, data);
-
-        }
-
         JButton backButton = new JButton("Back to Game List");
         backButton.setBounds(170, 350, 150, 30);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                f.dispose();
+                formTransactions.dispose();
                 new GameList(id);
             }
         });
@@ -66,10 +50,10 @@ public class TransactionsMenu {
         table.setBounds(50, 100, 700, 200);
         table.setRowHeight(100);
 
-        f.setSize(800, 500);
-        f.add(backButton);
-        f.add(new JScrollPane(table));
-        f.setVisible(true);
+        formTransactions.setSize(800, 500);
+        formTransactions.add(backButton);
+        formTransactions.add(new JScrollPane(table));
+        formTransactions.setVisible(true);
 
     }
 }
